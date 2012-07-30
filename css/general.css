@@ -8,10 +8,18 @@ body {
 	height: 400px;
 }
 
+#text_field {
+	display: block;
+}
+
+#text_submit_button {
+	display: block;
+}
+
 fieldset {
 	display: inline;
 }
 
-label {
+/*label {
 	display: inline;
-}
+}*/

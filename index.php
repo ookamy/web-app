@@ -2,7 +2,12 @@
 require_once 'includes/db.php';
 session_start();
 
-$text = filter_input(INPUT_POST, 'text', FILTER_SANITIZE_STRING);
+if (isset($_SESSION['file_uploaded'])) {
+	$text = file_get_contents($_SESSION['file_uploaded']);
+	}
+	else {
+	$text = filter_input(INPUT_POST, 'text', FILTER_SANITIZE_STRING);
+	}
 $uwords = filter_input(INPUT_POST, 'preferredlang', FILTER_SANITIZE_STRING);
 $words = array();
 $text_lowered = strtolower($text);
@@ -10,7 +15,6 @@ $words = str_word_count($text_lowered, 1);
 $wordsnumber = count($words);
 $wordslist=array_count_values($words);
 
-//print_r(array_keys($wordslist));
 
 reset($wordslist);
 
@@ -61,9 +65,9 @@ $db->query($sql_string);
 
 <h1>Enter text</h1>
 <form method="post" action="index.php">
-<label for="text">Input text here </label>
+<label for="text" id="text_field">Input text here </label>
 <textarea id="text" name="text"></textarea>
-<button type="submit">Submit</button>
+<button type="submit" id="text_submit_button">Submit</button>
 </form>
 <h2>Or upload a text file</h2>
 <form method='post' enctype='multipart/form-data' action='upload.php'>
