@@ -8,5 +8,5 @@
 - The most frustraiting part for me was the same as previous week- to follow right syntax and trace errors. 
       for example, I spent couple hours trying to understand why my $_SESSION variable does not work. Finally, I found that
 	  option "Register globals" option in the WAMP Php settings was turned off.
-- I'm glad that I was able to find a couple of differnt ways to make it work.
+- I'm glad that I was able to find a couple of different ways to make it work.
 - Next goals are: make login page and registration, continue working with design, include some JS
