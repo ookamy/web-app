@@ -1,5 +1,6 @@
 <?php
 require_once 'includes/db.php';
+session_start();
 
 $text = filter_input(INPUT_POST, 'text', FILTER_SANITIZE_STRING);
 $uwords = filter_input(INPUT_POST, 'preferredlang', FILTER_SANITIZE_STRING);
@@ -64,6 +65,12 @@ $db->query($sql_string);
 <textarea id="text" name="text"></textarea>
 <button type="submit">Submit</button>
 </form>
+<h2>Or upload a text file</h2>
+<form method='post' enctype='multipart/form-data' action='upload.php'>
+    <strong>File: </strong><input type='file' name='file_upload'>
+    <button type="submit">Upload</button>
+</form>
+<strong><?php print_r($_SESSION["upload-report"]); $_SESSION["upload-report"] = '';?></strong>
 
 <h2>Words entered: <?php echo $wordsnumber;?></h2>
 	<form method="post" action="getlist.php">
