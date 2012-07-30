@@ -1,0 +1,17 @@
+body {
+	margin: 2em auto;
+	width: 800px;
+}
+
+#text {
+	width: 400px;
+	height: 400px;
+}
+
+fieldset {
+	display: inline;
+}
+
+label {
+	display: inline;
+}

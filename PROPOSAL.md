@@ -22,7 +22,7 @@ This small application will be designed for those who learn foreign language (fo
 - PHP
 - Wordpress
 - Javascript, JQuerry, Ajax
-- Symphony framework
+
 
 ## Similar applications
 
@@ -71,7 +71,7 @@ Yulia is a 26-year old international student at Algonquin College. She has been 
 
 - Prefers paper books instead of e-books
 - Yulia loves English classic literature, especially romantic novels, but sometimes finds words she is unfamiliar with.
-- Believe that everyone should speak more than one language
+- Believes that everyone should speak more than one language
 
 #### Demotivations
 
