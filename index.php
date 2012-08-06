@@ -2,7 +2,7 @@
 require_once 'includes/db.php';
 session_start();
 
-if (isset($_SESSION['file_uploaded'])) {
+if ($_SESSION['file_uploaded'] != '') {
 	$text = file_get_contents($_SESSION['file_uploaded']);
 	}
 	else {
@@ -74,7 +74,12 @@ $db->query($sql_string);
     <strong>File: </strong><input type='file' name='file_upload'>
     <button type="submit">Upload</button>
 </form>
-<strong><?php print_r($_SESSION["upload-report"]); $_SESSION["upload-report"] = '';?></strong>
+<strong><?php if(($_SESSION["upload-report"])!=''){
+				 echo ($_SESSION["upload-report"]);
+				 if($_SESSION["upload-report"] == 'File uploaded successfully.') {unlink($_SESSION['file_uploaded']);}
+ 				 $_SESSION["upload-report"] = ''; 
+				 $_SESSION['file_uploaded'] = '';}
+				 ?></strong>
 
 <h2>Words entered: <?php echo $wordsnumber;?></h2>
 	<form method="post" action="getlist.php">
