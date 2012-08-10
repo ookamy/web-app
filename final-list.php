@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+$translation = filter_input(INPUT_POST, 'translation', FILTER_SANITIZE_STRING);
 $wcounter = $_SESSION['wordscounter'];
 $num = 1;
 $final_list = array();
@@ -13,27 +14,40 @@ for ($i = 1; $i <= $wcounter; $i++) {
 			}
 }
 
+$title = 'Final list';
+$page = 'finallist';
+
+include 'includes/nav.php';
 
 ?>
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Your final words list</title>
-    </head>
-
-<body>
+<article class="clearfix">
 	<h1>Here is your final list !</h1>
 	<table border="1">
 		<tr>
-			<td><strong>#</strong></td>
-			<td><strong>Word</strong></td>
+			<td><strong class="table_header">#</strong></td>
+			<td><strong class="table_header">Word</strong></td>
+			<td><strong class="table_header">Translation</strong></td>
 		</tr>
 <?php foreach ($final_list as $single_word) : ?>
 		<tr>
 			<td><?php echo $num; ?></td>
-			<td><?php echo $single_word; $num++; ?></td>
+			<td><span data-word-id="<?php echo $num;?>" class="original-word"><?php echo $single_word;?></span></td>
+			<td>
+			<?php
+			if (isset($translation)) {
+				$word_to_trans = "http://m.slovari.yandex.ru/translate.xml?text=".$single_word."&lang=en-ru-en";
+				$get_translation = file_get_contents($word_to_trans,10); 
+				$string_1 = strstr($get_translation, ')</b> <a href="/translate.xml?text=');
+				$w1 = strstr(strstr((sprintf("[%10.100s]\n", $string_1)), '&amp;lang=en-ru-en', TRUE),'text=');
+				$w2 = substr(strrchr($w1, '='), 1 );
+				echo $w2;}
+				else{
+				echo '<a data-word-id="' . $num . '" href="#" class="get-trans">Get translation<a>';
+				}
+			$num++;?>
+			</td>
 		</tr>
 <?php endforeach; ?>
-</body>
-</html>
+	</table>
+</article>
+<?php include 'includes/wrap-bottom.php'; ?>

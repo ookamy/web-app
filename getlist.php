@@ -68,43 +68,50 @@ FROM wordslist
 ORDER BY frq DESC
 ');
 $results = $sql->fetchAll();
+$split_results = array_chunk($results, ceil(count($results) / 3));
+
 $num = 1;
 
-?><!DOCTYPE HTML>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>List of the words</title>
-	</head>
+$title = 'Words list';
+$page = 'wordslist';
 
-<body>
+include 'includes/nav.php';
 
-<h1>List of words used in the text</h1>
-<p>Total words used in text: <?php //echo $wordsnumber;?></p>
-<p>Excluded: <strong>
-	<?php if (isset($articles)) {echo "articles ";};
-		  if (isset($pronouns)){echo "pronouns ";};
-		  if (isset($prepos)){echo "prepositions ";};
-		  if ($wordsexclusion > 0 ) {echo $wordsexclusion; echo " most used words";}; ?></strong></p>
-	<form method="post" action="final-list.php">
-	<table border="1">
-		<tr>
-			<td><strong>#</strong></td>
-			<td><strong>Word</strong></td>
-			<td>Used</td>
-			<td>To Final list</td>
-		</tr>
-<?php foreach ($results as $list) : ?>
-		<tr>
-			<td><?php echo $num ?></td>
-			<td><label for="<?php echo "w"; echo $num;?>"><?php echo $list['word']; ?></label></td>
-			<td><?php echo $list['frq'];  ?></td>
-			<td><input type="checkbox" id="<?php echo "w"; echo $num;?>" name="<?php echo "w"; echo $num; $num++;?>" value="<?php echo $list['word']; ?>"></td>
-		</tr>
-<?php endforeach; ?>
-	</table>
-    <?php $_SESSION['wordscounter']=$num; ?>
-	<button type="submit">Get final list</button>
-	</form>
-</body>
-</html>
+?>
+<article class="clearfix">
+	<h1>List of words used in the text</h1>
+	<p>Excluded: <strong>
+		<?php if (isset($articles)) {$e=1; echo "articles ";};
+			  if (isset($pronouns)){$e=1; echo "pronouns ";};
+			  if (isset($prepos)){$e=1; echo "prepositions ";};
+			  if ($wordsexclusion > 0 ){$e=1; echo $wordsexclusion; echo " most used words";}; 
+			  if (!isset($e)){echo "Nothing";};?></strong></p>
+		<form method="post" action="final-list.php">
+        
+        <?php foreach($split_results as $results) : ?>
+		<table border="1">
+			<tr>
+				<td><strong>#</strong></td>
+				<td><strong>Word</strong></td>
+				<td><strong>Used</strong></td>
+				<td><strong>!</strong></td>
+			</tr>
+				<?php foreach ($results as $list) : ?>
+						<tr>
+							<td><?php echo $num ?></td>
+							<td><label for="<?php echo "w"; echo $num;?>"><?php echo $list['word']; ?></label></td>
+							<td><?php echo $list['frq'];  ?></td>
+							<td><input type="checkbox" id="<?php echo "w"; echo $num;?>" name="<?php echo "w"; echo $num; $num++;?>" value="<?php echo $list['word']; ?>"></td>
+						</tr>
+				<?php endforeach; ?>
+		</table>
+        <?php endforeach; ?>
+<!--    <input type="checkbox" id="translation" name="translation" value="1">
+        <label for="translation">Translate to Russian</label> -->		
+		<?php $_SESSION['wordscounter']=$num; ?>
+		<button type="submit">Get final list</button>
+		</form>
+	</article>
+<?php
+include 'includes/wrap-bottom.php';
+?>
