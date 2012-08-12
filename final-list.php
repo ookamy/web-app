@@ -23,7 +23,8 @@ include 'includes/nav.php';
 
 ?>
 <article class="clearfix">
-	<div class="clearfix"><h1>Here is your final list !</h1></div>
+	<div class="clearfix"><h1>Here is your final list!</h1></div>
+	<p>Please review your final list and make a translation if needed:</p>
     <?php foreach($split_results as $final_list) : ?>
 	<table border="1">
 		<tr>
@@ -54,4 +55,5 @@ include 'includes/nav.php';
 		</table>
 	<?php endforeach; ?>
 </article>
+<script src="js/get_translation.js"></script>
 <?php include 'includes/wrap-bottom.php'; ?>

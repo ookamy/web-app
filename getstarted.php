@@ -77,7 +77,7 @@ include 'includes/nav.php';
 		<strong>Words entered: <?php 
 			echo $wordsnumber;
 			$sql = $db->query('
-			SELECT total_words_number
+			SELECT stat
 			FROM words_number
 			WHERE id = 1
 			');

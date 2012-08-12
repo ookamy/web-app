@@ -311,7 +311,7 @@ fieldset {
 
 table {
 	float: left;
-	border: none;
+	border: thin;
 	margin: 0 0.2em;
 }
 

@@ -83,7 +83,7 @@ include 'includes/nav.php';
 <article class="clearfix">
 	<h1>Make your final list!</h1>
 	<p>Please select the words you want to include to your final list.</p>
-	<p>Here are the the words used in text:</p>
+	<p>Here are the words used in text:</p>
 	<p>Excluded: <strong>
 		<?php if (isset($articles)) {$e=1; echo "articles ";};
 			  if (isset($pronouns)){$e=1; echo "pronouns ";};
