@@ -42,7 +42,6 @@ if (isset($prepos)){
 };
 
 if ($wordsexclusion > 0 ){
-			
 			$sql = $db-> prepare ('
 			SELECT word
 			FROM 1000words
@@ -72,6 +71,9 @@ $split_results = array_chunk($results, ceil(count($results) / 3));
 
 $num = 1;
 
+/*$sql_string = "INSERT INTO `words`.`app_most_used_words` (`id`, `word`, `frq`) VALUES ('2', 'two', '2');";
+$db->query($sql_string);
+*/
 $title = 'Words list';
 $page = 'wordslist';
 
@@ -79,7 +81,9 @@ include 'includes/nav.php';
 
 ?>
 <article class="clearfix">
-	<h1>List of words used in the text</h1>
+	<h1>Make your final list!</h1>
+	<p>Please select the words you want to include to your final list.</p>
+	<p>Here are the the words used in text:</p>
 	<p>Excluded: <strong>
 		<?php if (isset($articles)) {$e=1; echo "articles ";};
 			  if (isset($pronouns)){$e=1; echo "pronouns ";};
@@ -87,21 +91,20 @@ include 'includes/nav.php';
 			  if ($wordsexclusion > 0 ){$e=1; echo $wordsexclusion; echo " most used words";}; 
 			  if (!isset($e)){echo "Nothing";};?></strong></p>
 		<form method="post" action="final-list.php">
-        
         <?php foreach($split_results as $results) : ?>
 		<table border="1">
 			<tr>
 				<td><strong>#</strong></td>
-				<td><strong>Word</strong></td>
-				<td><strong>Used</strong></td>
-				<td><strong>!</strong></td>
+				<td class="selection_list"><strong>Word</strong></td>
+				<td class="selection_list"><strong>Used</strong></td>
+				<td class="selection_list"><strong>!</strong></td>
 			</tr>
 				<?php foreach ($results as $list) : ?>
 						<tr>
-							<td><?php echo $num ?></td>
+							<td class="selection_list"><?php echo $num ?></td>
 							<td><label for="<?php echo "w"; echo $num;?>"><?php echo $list['word']; ?></label></td>
-							<td><?php echo $list['frq'];  ?></td>
-							<td><input type="checkbox" id="<?php echo "w"; echo $num;?>" name="<?php echo "w"; echo $num; $num++;?>" value="<?php echo $list['word']; ?>"></td>
+							<td class="selection_list"><?php echo $list['frq'];  ?></td>
+							<td class="selection_list"><input type="checkbox" id="<?php echo "w"; echo $num;?>" name="<?php echo "w"; echo $num; $num++;?>" value="<?php echo $list['word']; ?>"></td>
 						</tr>
 				<?php endforeach; ?>
 		</table>
@@ -109,7 +112,8 @@ include 'includes/nav.php';
 <!--    <input type="checkbox" id="translation" name="translation" value="1">
         <label for="translation">Translate to Russian</label> -->		
 		<?php $_SESSION['wordscounter']=$num; ?>
-		<button type="submit">Get final list</button>
+		<div class="clearfix"></div>
+		<button id="get_final_bitton" type="submit">Get final list</button>
 		</form>
 	</article>
 <?php

@@ -38,17 +38,9 @@ $sql_commands = array();
 
 foreach  (array_keys($wordslist) as $value)
 {	
-	//echo $value;
-	//echo current($wordslist);
 	$c_frq = current($wordslist);
-	//echo "<br/>";
 	next($wordslist);
-	
 	$sql_commands[] = '("'.$value.'", '.$c_frq.')';
-
-	//usleep(500000);
-	//header('Location: C:\wamp\www\webap\index.php');
-	//exit;
 }
 
 $sql_string = 'INSERT INTO wordslist (word, frq) VALUES ' . implode(',', $sql_commands);
@@ -63,13 +55,14 @@ include 'includes/nav.php';
 <article class="clearfix">
 	<h1>Let's get started!</h1>
 	<div id="entertextform">
-		<h2>Enter or upload your text</h2>
+		<h2>Step 1: Enter or upload your text</h2>
+		<p><strong>You can enter your text in the text field below</strong></p>
 		<form method="post" action="getstarted.php">
-		<label for="text" id="text_field">Input text here </label>
+		<label for="text" id="text_field">Input text here</label>
 		<textarea id="text" name="text"></textarea>
 		<button type="submit" id="text_submit_button">Submit</button>
 		</form>
-		<strong>Or upload a text file</strong>
+		<strong>Or upload a text file (up to 500kb)</strong>
 		<form method='post' enctype='multipart/form-data' action='upload.php'>
 			<strong>File: </strong><input type='file' name='file_upload'>
 			<button type="submit">Upload</button>
@@ -81,11 +74,31 @@ include 'includes/nav.php';
 						 unset($_SESSION["file_uploaded"]);}
 						 ?></strong>
 		
-		<strong>Words entered: <?php echo $wordsnumber;?></strong>
+		<strong>Words entered: <?php 
+			echo $wordsnumber;
+			$sql = $db->query('
+			SELECT total_words_number
+			FROM words_number
+			WHERE id = 1
+			');
+			$total_words_number_db = $sql->fetch();
+			$increase_twn = $total_words_number_db[0] + $wordsnumber;
+			$sql = $db-> prepare ('
+			UPDATE words_number
+			SET stat = :wordsnumber
+			WHERE id = 1;
+			UPDATE words_number
+			SET stat = stat+1
+			WHERE id = 2;
+			');
+			$sql->bindValue(':wordsnumber', $increase_twn , PDO::PARAM_INT);
+			$sql->execute();
+			
+			?></strong>
 			<form method="post" action="getlist.php">
 				<div>
 				  <fieldset class="exclusion1">
-					<legend>Exclude most used words from the list</legend>
+					<legend>Exclude most used words from the list:</legend>
 					<input type="radio" id="100words" name="uwords" value="100"<?php if ($uwords == '100') { echo ' checked'; } ?>>
 					<label for="100words">100 words</label>
 					<input type="radio" id="500words" name="uwords" value="500"<?php if ($uwords == '500') { echo ' checked'; } ?>>
@@ -96,7 +109,7 @@ include 'includes/nav.php';
 				</div>
 						
 				<div>
-					<p>Exclude also</p>
+					<p>Exclude also:</p>
 					<input type="checkbox" id="articles" name="articles" value="1">
 					<label for="articles">Articles</label>
 					<input type="checkbox" id="pronouns" name="pronouns" value="1">

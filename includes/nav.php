@@ -6,12 +6,13 @@
 		<link href="css/general.css" rel="stylesheet">
 		<script src="js/modernizr-2.0.6.js"></script>
 		<script src="js/respond.min.js"></script>
+		<link href='http://fonts.googleapis.com/css?family=Chango' rel='stylesheet' type='text/css'>
 		<meta name="viewport" content="width=device-width">
 	</head>
 	<body>
 		<div class="top"></div>
 			<header>
-				<div class="logo"></div>
+				<div class="logo"><span id="top-header">&nbsp;Ready&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="to">to</span>Read!</span></div>
 				<nav>
 					<ul>
 						<li<?php if ($page == 'home') { ?> class="current"<?php } ?>><a href="index.php">Home</a></li>
