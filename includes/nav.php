@@ -13,7 +13,7 @@
 	<body>
 		<div class="top"></div>
 			<header>
-				<div class="logo"><span id="top-header">&nbsp;Ready&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="to">to</span>Read&nbsp;</span></div>
+				<div class="logo"><a  id="logo_sign" href="./"><span id="top-header">&nbsp;Ready&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="to">to</span>Read&nbsp;</span></a></div>
 				<nav>
 					<ul>
 						<li<?php if ($page == 'home') { ?> class="current"<?php } ?>><a href="index.php">Home</a></li>

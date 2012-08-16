@@ -49,6 +49,10 @@ body {
 	text-align: center;
 }
 
+#logo_sign {
+		text-decoration: none;
+}
+
 nav ul {
 	margin: 0;
 	padding: 0;
@@ -67,38 +71,19 @@ nav li:first-child {
 	border-top: 1px solid #478F15;
 }
 
-.images {
-	margin: 3em 0 3em 0;
+#steps {
+	text-align: center;
 }
 
-.rightcoldouble {
-	width: 80%;
-	margin: 0 auto;
-	padding: 0;
-	float: none;
+img {
+	border: solid #CCC;
 }
 
-.rightcolliststyle {
-	padding: 0;
-	margin: 0;
-	list-style-type: none;
-	font-size: 1.125em;
-	color: #333;
-	text-align: left;
-}
 
 h2 {
 	margin: 0;
 	color: #478F15;
 	text-transform: uppercase;
-}
-
-.colandhalf {
-	width: 18.75%;
-}
-
-.colquadandhalf {
-	width: 56.25%;
 }
 
 article {
@@ -222,18 +207,6 @@ article p {
 	padding-right: 1em;
 	float: left;
 	font-size: 0.87em;
-}
-
-.rightcoldouble {
-	width: 80%;
-	margin: 0 auto;
-	padding: 0;
-	float: none;
-}
-
-.textboxright {
-	float: left;
-	width: 50%;
 }
 
 footer {

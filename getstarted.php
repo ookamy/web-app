@@ -55,7 +55,7 @@ include 'includes/nav.php';
 <article class="clearfix">
 	<h1>Let's get started!</h1>
 	<div id="entertextform">
-		<h2>Step 1: Enter or upload your text</h2>
+		<h2>Enter or upload your text</h2>
 		<p><strong>You can enter your text in the text field below</strong></p>
 		<form method="post" action="getstarted.php">
 		<label for="text" id="text_field">Input text here</label>
