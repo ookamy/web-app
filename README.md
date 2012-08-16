@@ -26,6 +26,6 @@ Version 1.0
 Available at
 
 ##License
-Ready to Read is licensed under the BSD 4-Clause license.
+Ready to Read is licensed under the BSD 3-Clause license.
 
 Copyright 2012 Aleksandr Santalov
