@@ -23,7 +23,7 @@ E-mail: sant0125@algonquinlive.ca
 
 ##Location
 Version 1.0
-Available at
+Available at http://ready-to-read.phpfogapp.com
 
 ##License
 Ready to Read is licensed under the BSD 3-Clause license.
